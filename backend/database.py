@@ -11,21 +11,33 @@ class PaintingModel(db.Model):
     file_path = db.Column(db.Text)
 
     def __init__(self, x, y, style, image_file):
-        file_path = os.path.join('./uploads', style, image_file.filename)
-        print(image_file, file_path)
+        upload_folder = db.get_app().config['UPLOAD_FOLDER']
+        file_path = os.path.join(upload_folder, style, image_file.filename)
+        
         image_file.save(file_path)
 
         super(PaintingModel, self).__init__(x=x, y=y, style=style, file_path=file_path)
 
 def db_init(app):
     db.init_app(app)
+    upload_folder = app.config['UPLOAD_FOLDER']
 
-    if (not os.path.isfile('./database.db')):
+    if not os.path.isfile(app.config['SQLALCHEMY_DATABASE_URI']):
         with app.app_context():
             db.create_all()
 
+    if not os.path.isdir(upload_folder):
+        os.mkdir(upload_folder)
+        for dirpath, dirnames, files in os.walk('dataset'):
+            for dirname in dirnames:
+                os.mkdir(os.path.join(upload_folder, dirname))
+
+    
+
 def db_clear():
-    os.remove('./database.db')
-    for dirpath, dirnames, files in os.walk('./uploads'):
+    os.remove(db.get_app().config['SQLALCHEMY_DATABASE_URI'])
+
+    upload_folder = db.get_app().config['UPLOAD_FOLDER']
+    for dirpath, dirnames, files in os.walk(upload_folder):
         for file_name in files:
             os.remove(os.path.join(dirpath, file_name))

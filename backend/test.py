@@ -17,3 +17,6 @@ print(response.json())
 
 response = requests.get(BASE + 'painting', {'id': 3})
 print(response.json())
+
+response = requests.get(BASE + 'painting', {'id': 100})
+print(response.json())

@@ -3,6 +3,7 @@ import werkzeug
 from werkzeug.utils import secure_filename
 from database import db, PaintingModel
 import painting_processing
+import os
 
 painting_post_args = reqparse.RequestParser()
 painting_post_args.add_argument('file', type=werkzeug.datastructures.FileStorage, location='files')
@@ -45,7 +46,12 @@ class Painting(Resource):
         if painting_style is None:
             painting_style = painting_processing.get_style(image_file)
 
-        painting = PaintingModel(x, y, painting_style, image_file)
+        upload_folder = db.get_app().config['UPLOAD_FOLDER']
+        file_path = os.path.join(upload_folder, painting_style, image_file.filename)
+        
+        image_file.save(file_path)
+        
+        painting = PaintingModel(x, y, painting_style, file_path)
 
         db.session.add(painting)
         db.session.commit()

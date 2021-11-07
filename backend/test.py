@@ -6,19 +6,19 @@ BASE = 'http://127.0.0.1:5000/'
 #response = requests.post(BASE + 'painting', {'x': 1.0, 'y': 0.0, 'style': 'marina'})
 #response = requests.post(BASE + 'painting', {'x': 0.0, 'y': 1.0, 'style': 'abstract'})
 
-response = requests.get(BASE + 'painting', {'id': 0})
+response = requests.get(BASE + 'painting/0')
 print(response.json())
 
-response = requests.get(BASE + 'painting', {'id': 1})
+response = requests.get(BASE + 'painting/1')
 print(response.json())
 
-response = requests.get(BASE + 'painting', {'id': 2})
+response = requests.get(BASE + 'painting/2')
 print(response.json())
 
-response = requests.get(BASE + 'painting', {'id': 3})
+response = requests.get(BASE + 'painting/3')
 print(response.json())
 
-response = requests.get(BASE + 'painting', {'id': 100})
+response = requests.get(BASE + 'painting/100')
 print(response.json())
 
 response = requests.get(BASE + 'paintings_list')

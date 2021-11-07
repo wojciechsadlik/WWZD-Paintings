@@ -4,6 +4,7 @@ from painting import Painting
 from paintings_list import Paintings_list
 import database
 import painting_processing
+from flasgger import Swagger
 
 app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///database.db'
@@ -12,13 +13,14 @@ app.config['UPLOAD_FOLDER'] = 'uploads'
 
 api = Api(app)
 
+swagger = Swagger(app)
+
+api.add_resource(Painting, '/painting/<painting_id>')
+api.add_resource(Paintings_list, '/paintings_list')
+
 painting_processing.fit_pca()
 
 database.db_init(app)
-
-
-api.add_resource(Painting, '/painting')
-api.add_resource(Paintings_list, '/paintings_list')
 
 if __name__ == '__main__':
     app.run(debug=True)

@@ -20,3 +20,6 @@ print(response.json())
 
 response = requests.get(BASE + 'painting', {'id': 100})
 print(response.json())
+
+response = requests.get(BASE + 'paintings_list')
+print(response.json())

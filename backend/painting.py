@@ -12,7 +12,7 @@ painting_post_args.add_argument('style', type=str)
 painting_get_args = reqparse.RequestParser()
 painting_get_args.add_argument('id', type=int)
 
-painting = {
+marshal_painting = {
     'id': fields.Integer,
     'x': fields.Float,
     'y': fields.Float,
@@ -20,7 +20,7 @@ painting = {
 }
 
 class Painting(Resource):
-    @marshal_with(painting)
+    @marshal_with(marshal_painting)
     def get(self):
         args = painting_get_args.parse_args()
         result = PaintingModel.query.filter_by(id=args['id']).all()
@@ -30,7 +30,7 @@ class Painting(Resource):
         
         return result, 200
 
-    @marshal_with(painting)
+    @marshal_with(marshal_painting)
     def post(self):
         args = painting_post_args.parse_args()
 

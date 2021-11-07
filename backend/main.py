@@ -1,6 +1,7 @@
 from flask import Flask
 from flask_restful import Api
 from painting import Painting
+from paintings_list import Paintings_list
 import database
 import painting_processing
 
@@ -17,6 +18,7 @@ database.db_init(app)
 
 
 api.add_resource(Painting, '/painting')
+api.add_resource(Paintings_list, '/paintings_list')
 
 if __name__ == '__main__':
     app.run(debug=True)

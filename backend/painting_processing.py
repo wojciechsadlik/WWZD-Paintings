@@ -13,6 +13,8 @@ PCA_PICKLE_PATH = 'pca.pkl'
 
 model = ResNet50()
 
+model = Model(inputs=model.inputs, outputs=model.layers[-2].output)
+
 global pca
 pca = PCA(n_components=2)
 

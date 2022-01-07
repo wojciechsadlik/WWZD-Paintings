@@ -15,7 +15,6 @@ model = ResNet50()
 
 model = Model(inputs=model.inputs, outputs=model.layers[-2].output)
 
-global pca
 pca = PCA(n_components=2)
 
 def fit_pca():
@@ -87,7 +86,7 @@ def get_point(image):
     features = model.predict(model_input)
 
     coords = pca.transform(features)
-    return coords[0][1], coords[0][1]
+    return coords[0][0], coords[0][1]
 
 
 def get_style(image):

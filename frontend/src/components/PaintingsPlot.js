@@ -41,7 +41,7 @@ function PaintingsPlot() {
   } else {
     return (
       <div>
-        <Plot data={paintings} />
+        <Plot data={paintings} layout={{width: 1280, height: 960}}/>
       </div>
     );
   }

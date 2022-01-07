@@ -1,11 +1,11 @@
-import Plot from "./components/Plot";
+import PaintingsPlot from "./components/PaintingsPlot";
 
 function App() {
   return (
     <div className="App">
       <h1>Painting dataset visualisation</h1>
 
-      <Plot />
+      <PaintingsPlot />
     </div>
   );
 }

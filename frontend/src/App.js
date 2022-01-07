@@ -1,7 +1,11 @@
+import Plot from "./components/Plot";
+
 function App() {
   return (
     <div className="App">
-      Hello World!
+      <h1>Painting dataset visualisation</h1>
+
+      <Plot />
     </div>
   );
 }

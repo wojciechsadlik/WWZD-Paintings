@@ -21,6 +21,10 @@ function getPaintingsPlotData(paintings) {
     paintingsMap.get(painting.style).y.push(painting.y);
   });
 
+  if (paintingsMap.get("uploads") != undefined) {
+    paintingsMap.get("uploads").marker.symbol = "x";
+  }
+
   return Array.from(paintingsMap.values());
 }
 

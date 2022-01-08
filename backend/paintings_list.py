@@ -46,10 +46,6 @@ class Paintings_list(Resource):
             name: file
             type: file
             required: true
-          - in: formData
-            name: style
-            type: string
-            required: false
         responses:
           201:
             description: File uploaded
@@ -63,7 +59,6 @@ class Paintings_list(Resource):
 
         image_file = args['file']
         painting_style = 'upload'
-        print(image_file)
 
         if image_file is None:
             abort(400, messsage='No file uploaded')
@@ -83,4 +78,4 @@ class Paintings_list(Resource):
         db.session.add(painting)
         db.session.commit()
 
-        return painting, 201
+        return 201

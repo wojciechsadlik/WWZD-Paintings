@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import Plot from "react-plotly.js";
+import axios from "axios";
 
 function getPaintingsPlotData(paintings) {
   const paintingsMap = new Map();
@@ -28,12 +29,12 @@ function PaintingsPlot() {
 
   useEffect(() => {
     setIsLoading(true);
-    fetch("http://localhost:3000/paintings_list")
-      .then((response) => response.json())
-      .then((data) => {
-        setPaintings(getPaintingsPlotData(data));
+    axios.get("http://localhost:3000/paintings_list").then((response) => {
+      if (response.status == 200) {
+        setPaintings(getPaintingsPlotData(response.data));
         setIsLoading(false);
-      });
+      }
+    });
   }, []);
 
   if (isLoading) {
@@ -41,7 +42,7 @@ function PaintingsPlot() {
   } else {
     return (
       <div>
-        <Plot data={paintings} layout={{width: 1280, height: 960}}/>
+        <Plot data={paintings} layout={{ width: 1280, height: 960 }} />
       </div>
     );
   }

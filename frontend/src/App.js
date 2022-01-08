@@ -1,4 +1,5 @@
 import PaintingsPlot from "./components/PaintingsPlot";
+import Upload from "./components/Upload";
 
 function App() {
   return (
@@ -6,6 +7,7 @@ function App() {
       <h1>Painting dataset visualisation</h1>
 
       <PaintingsPlot />
+      <Upload />
     </div>
   );
 }

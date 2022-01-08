@@ -1,13 +1,10 @@
-import PaintingsPlot from "./components/PaintingsPlot";
-import Upload from "./components/Upload";
+import PaintingsVisualisation from "./components/PaintingsVisualisation";
 
 function App() {
   return (
     <div className="App">
-      <h1>Painting dataset visualisation</h1>
-
-      <PaintingsPlot />
-      <Upload />
+      <h1>Paintings dataset visualisation</h1>
+      <PaintingsVisualisation />
     </div>
   );
 }

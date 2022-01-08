@@ -13,6 +13,7 @@ function getPaintingsPlotData(paintings) {
         name: painting.style,
         mode: "markers",
         type: "scatter",
+        marker: { size: 8 },
       });
     }
 
@@ -23,21 +24,19 @@ function getPaintingsPlotData(paintings) {
   return Array.from(paintingsMap.values());
 }
 
-function PaintingsPlot() {
-  const [isLoading, setIsLoading] = useState(true);
+function PaintingsPlot(props) {
   const [paintings, setPaintings] = useState([]);
 
   useEffect(() => {
-    setIsLoading(true);
     axios.get("http://localhost:3000/paintings_list").then((response) => {
       if (response.status == 200) {
         setPaintings(getPaintingsPlotData(response.data));
-        setIsLoading(false);
+        props.onLoad();
       }
     });
-  }, []);
+  }, [props.isLoading]);
 
-  if (isLoading) {
+  if (props.isLoading) {
     return <div>L o a d i n g . . .</div>;
   } else {
     return (

@@ -88,6 +88,3 @@ def get_point(image):
     coords = pca.transform(features)
     return coords[0][0], coords[0][1]
 
-
-def get_style(image):
-    return 'abstract'

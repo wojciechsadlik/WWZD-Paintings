@@ -43,9 +43,6 @@ def create_db(app):
 
 def create_upload_folder(upload_folder):
     os.mkdir(upload_folder)
-    for dirpath, dirnames, files in os.walk('dataset'):
-        for dirname in dirnames:
-            os.mkdir(os.path.join(upload_folder, dirname))
 
 
 def load_dataset():

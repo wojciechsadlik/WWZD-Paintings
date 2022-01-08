@@ -8,7 +8,6 @@ import painting_processing
 
 painting_post_args = reqparse.RequestParser()
 painting_post_args.add_argument('file', type=werkzeug.datastructures.FileStorage, location='files')
-painting_post_args.add_argument('style', type=str)
 
 class Paintings_list(Resource):
     @marshal_with(marshal_painting)
@@ -56,23 +55,24 @@ class Paintings_list(Resource):
             description: File uploaded
           400:
             description: No file uploaded
+          409:
+            description: File already exists
         """
 
         args = painting_post_args.parse_args()
 
         image_file = args['file']
-        painting_style = args['style']
+        painting_style = 'upload'
         print(image_file)
 
         if image_file is None:
             abort(400, messsage='No file uploaded')
 
-        
-        if painting_style is None:
-            painting_style = painting_processing.get_style(image_file)
-
         upload_folder = db.get_app().config['UPLOAD_FOLDER']
-        file_path = os.path.join(upload_folder, painting_style, image_file.filename)
+        file_path = os.path.join(upload_folder, image_file.filename)
+
+        if (os.path.isfile(file_path)):
+            abort(409, message='File already exists')
 
         image_file.save(file_path)
 

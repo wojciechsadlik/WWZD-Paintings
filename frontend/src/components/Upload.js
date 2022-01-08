@@ -11,14 +11,25 @@ function Upload(props) {
     });
   }
 
+  function clearUploads() {
+    axios.delete("http://localhost:3000/paintings_list").then(() => {
+      props.onUpload();
+    });
+  }
+
   let fileInput = React.createRef();
 
   return (
-    <form encType="multipart/form-data" onSubmit={handleSubmit}>
-      <input type="file" name="file" ref={fileInput} />
+    <div>
+      <form encType="multipart/form-data" onSubmit={handleSubmit}>
+        <input type="file" name="file" ref={fileInput} />
+        <input type="submit" value="upload" />
+      </form>
       <br />
-      <input type="submit" value="upload" />
-    </form>
+      <hr />
+      <br />
+      <button onClick={clearUploads}>Clear uploads</button>
+    </div>
   );
 }
 

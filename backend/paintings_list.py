@@ -2,7 +2,7 @@ from flask_restful import Resource, reqparse, fields, marshal_with, abort
 import werkzeug
 from werkzeug.utils import secure_filename
 import os
-from database import PaintingModel, db
+from database import PaintingModel, db, clear_uploads
 from painting import marshal_painting
 import painting_processing
 
@@ -58,7 +58,7 @@ class Paintings_list(Resource):
         args = painting_post_args.parse_args()
 
         image_file = args['file']
-        painting_style = 'upload'
+        painting_style = 'uploads'
 
         if image_file is None:
             abort(400, messsage='No file uploaded')
@@ -79,3 +79,9 @@ class Paintings_list(Resource):
         db.session.commit()
 
         return 201
+
+    def delete(self):
+        clear_uploads()
+
+        return 200
+    

@@ -64,4 +64,12 @@ def load_dataset():
 
     print('\ndataset loaded\n')
 
+def clear_uploads():
+    upload_folder = db.get_app().config['UPLOAD_FOLDER']
+    for dirpath, dirnames, files in os.walk(upload_folder):
+        for file_name in files:
+            os.remove(os.path.join(dirpath, file_name))
+
+    db.session.query(PaintingModel).filter_by(style='uploads').delete()
+    db.session.commit()
     

@@ -6,13 +6,14 @@ from keras.preprocessing.image import load_img
 
 from keras.applications.resnet import preprocess_input, ResNet50
 from keras.models import Model
+from keras.models import load_model
 
 from sklearn.decomposition import PCA
 
 PCA_PICKLE_PATH = 'pca.pkl'
 
-model = ResNet50()
-
+# model = ResNet50()
+model=load_model('../modelResnet.h5')
 model = Model(inputs=model.inputs, outputs=model.layers[-2].output)
 
 pca = PCA(n_components=2)

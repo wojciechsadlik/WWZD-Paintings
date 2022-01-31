@@ -2,7 +2,7 @@ import PaintingsVisualisation from "./components/PaintingsVisualisation";
 
 function App() {
   return (
-    <div className="App">
+    <div id="App">
       <h1>Paintings dataset visualisation</h1>
       <PaintingsVisualisation />
     </div>

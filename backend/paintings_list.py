@@ -9,6 +9,7 @@ import painting_processing
 painting_post_args = reqparse.RequestParser()
 painting_post_args.add_argument('file', type=werkzeug.datastructures.FileStorage, location='files')
 
+
 class Paintings_list(Resource):
     @marshal_with(marshal_painting)
     def get(self):

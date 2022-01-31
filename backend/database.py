@@ -4,14 +4,15 @@ import painting_processing
 
 db = SQLAlchemy()
 
+
 class PaintingModel(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     x = db.Column(db.Float, nullable=False)
     y = db.Column(db.Float, nullable=False)
     style = db.Column(db.String(25), nullable=False)
-    file_path = db.Column(db.Text)
+    file_path = db.Column(db.Text, nullable=False)
 
-    
+
 def db_init(app):
     db.init_app(app)
     upload_folder = app.config['UPLOAD_FOLDER']
@@ -23,7 +24,7 @@ def db_init(app):
     if not os.path.isdir(upload_folder):
         create_upload_folder(upload_folder)
 
-    
+
 def db_clear():
     os.remove(db.get_app().config['SQLALCHEMY_DATABASE_URI'])
 
@@ -64,6 +65,7 @@ def load_dataset():
 
     print('\ndataset loaded\n')
 
+
 def clear_uploads():
     upload_folder = db.get_app().config['UPLOAD_FOLDER']
     for dirpath, dirnames, files in os.walk(upload_folder):
@@ -72,4 +74,3 @@ def clear_uploads():
 
     db.session.query(PaintingModel).filter_by(style='uploads').delete()
     db.session.commit()
-    

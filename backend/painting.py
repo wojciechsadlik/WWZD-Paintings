@@ -5,7 +5,8 @@ marshal_painting = {
     'id': fields.Integer,
     'x': fields.Float,
     'y': fields.Float,
-    'style': fields.String
+    'style': fields.String,
+    'file_path': fields.String
 }
 
 class Painting(Resource):

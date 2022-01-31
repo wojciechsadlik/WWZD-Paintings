@@ -2,6 +2,7 @@ import { useState } from "react";
 import PaintingsPlot from "./PaintingsPlot";
 import Upload from "./Upload";
 
+
 function PaintingsVisualisation() {
   const [isLoading, setIsLoading] = useState(true);
 
@@ -14,7 +15,7 @@ function PaintingsVisualisation() {
   }
 
   return (
-    <div>
+    <div id="myDiv">
       <PaintingsPlot isLoading={isLoading} onLoad={onPlotLoad} />
       <Upload onUpload={onUpload} />
     </div>

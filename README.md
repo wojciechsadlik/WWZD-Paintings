@@ -4,6 +4,6 @@ Visualizing [dataset of paintings from kaggle](https://www.kaggle.com/datasets/i
 
 Backend: python, flask, SQLAlchemy, Keras - feature extraction, processing and serving api.
 
-Frontend: ReactJS, plotly - data visualization using scatter plot.
+Frontend: ReactJS, plotly.js - data visualization using scatter plot.
 
 Small project made for Wizualizacje "Wielkich Zbiorów Danych" (Big Data Visualization CS course on Wroclaw University of Science and Technology).
